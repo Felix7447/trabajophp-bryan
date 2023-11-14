@@ -12,8 +12,17 @@
 
 <body>
     <div class="login-container">
+        <?php 
+            include_once "./config/login.php";
+            $login = new Login();
+            $login->connect();
+
+            if (isset($_POST['username']) AND isset($_POST['password'])) {
+                $login->validateUser();
+            }
+        ?>
         <h2>Iniciar Sesión</h2>
-        <form id="loginForm" action="login.php" method="POST">
+        <form id="loginForm" action="" method="POST">
             <input type="text" name="username" placeholder="Usuario" required>
             <input type="password" name="password" placeholder="Contraseña" required>
             <button type="submit">Iniciar Sesión</button>
