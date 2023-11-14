@@ -1,0 +1,143 @@
+canvas {
+  position: absolute;
+  z-index: index 1;
+}
+
+.container {
+  padding: 0;
+}
+
+.container-cam {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+
+.result-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.result-container>div {
+  font-size: 1.3rem;
+  padding: 0.5rem;
+  margin: 5px 0;
+  color: white;
+  text-transform: capitalize;
+}
+
+#table-res {
+  z-index: index 10000;
+}
+
+#age {
+  color: #1e94be;
+}
+
+#emotion {
+  color: #8a1025;
+}
+
+#gender {
+  color: #0f0f0f;
+}
+
+video {
+  width: 100%;
+}
+
+headers {
+  background: #42a5f5;
+  color: white;
+  width: 100%;
+  font-size: 2rem;
+  padding: 1rem;
+  font-size: 2rem;
+}
+
+/* +++++++++++++ */
+.modal-dialog {
+  top: 15%;
+  position: fixed;
+  margin: auto;
+  height: 100%;
+  width: auto;
+}
+
+.modal-backdrop.show {
+  opacity: 0;
+}
+
+#resizable {
+  height: 400px;
+  width: 500px;
+  padding: 5px;
+  border: 2px dashed #AAA;
+}
+/* CSS para el diseño del chat */
+.chat-box {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  height: 400px;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.chat-messages {
+  overflow-y: auto;
+}
+
+.message {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.incoming {
+  background-color: #e1f3f4;
+  align-self: flex-start;
+}
+
+.outgoing {
+  background-color: #b6e8e7;
+  align-self: flex-end;
+}
+
+.chat-input {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+  padding: 5px;
+  margin-right: 10px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+/* Estilos para los elementos de la tabla */
+.table-res tbody tr {
+  font-size: 15px;
+}
+
+.table-res .text-darck {
+  font-size: 15px;
+}
+

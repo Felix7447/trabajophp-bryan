@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Detector de Emociones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js">
+    </script>
+    <!-- ==========================================CHART======================================================================== -->
+    <script src="http://cdn.zingchart.com/zingchart.min.js"></script>
+    <script src="http://cdn.zingchart.com/angular/zingchart-angularjs.js"></script>
+    <!-- JavaScript -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="bg-light" ng-app="myApp" ng-controller="ListController">
+    <header class="p-3 mb-3 border-bottom bg-dark text-white">
+        <div class="container ">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="#" class="nav-link px-2 link-secondary"></a></li>
+                    <li><a href="#" class="nav-link px-2 link-dark"></a></li>
+                </ul>
+
+                <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        
+                    </a>
+                </div>
+
+                <button ng-click="verEmociones()" class="btn btn-outline-light me-2" data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop">Ver Resultado</button>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="container">
+                    <div class="container-cam">
+                        <video id="video" height="500" width="900" autoplay muted></video>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 p-5" id="table-res">
+                <div class="container">
+                    <table class="table table-bordered border-primary table-res" style="width: 80%;">
+                        <thead>
+                            <tr>
+                                <th class="w-25">Param.</th>
+                                <th class="w-50 text-center">Reult.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h6 class="text-darck">Emocion</h6>
+                                </td>
+                                <td class="text-center" >
+                                    <div id="emotion"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="text-darck">Sexo</h6>
+                                </td>
+                                <td class="text-center" >
+                                    <div id="gender"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <h6 class="text-darck">Años</h6>
+                                </td>
+                                <td class="text-center" >
+                                    <div id="age"></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+            <!-- Chat al costado (col-lg-3) -->
+<!-- Chat al costado (col-lg-2) -->
+<div class="col-lg-2 p-5" id="chat-container">
+    <div class="container">
+        <div class="chat-box">
+            <div class="chat-messages">
+                <!-- Mensajes del chat van aquí -->
+                <div class="message incoming">
+                    <p>¿Por qué te interesa trabajar en esta empresa?</p>
+                </div>
+                <div class="message outgoing">
+                    <p>Por que... </p>
+                </div>
+                <!-- Agrega más mensajes según sea necesario -->
+            </div>
+            <div class="chat-input">
+                <input type="text" placeholder="Escribe tu respuesta..." />
+                <button>Enviar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" aria-labelledby="staticBackdropLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <table id="fetchResult" cellspacing="1" cellpadding="8"
+                                    class="table table-bordered border-primary ">
+                                    <thead>
+                                        <tr>
+                                            <th class="bg-info text-light">Emotion</th>
+                                            <th class="bg-info text-light">Quantity</th>
+                                            <th class="bg-info text-light">Porcent %</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="items in itemsDetails">
+                                            <td>{{items.name}}</td>
+                                            <td>{{items.value}}</td>
+                                            <td>{{items.porcent }} %</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <h5>{{totalf}}</h5>
+                                            </td>
+                                            <td>{{'100 %'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-8">
+                                <div id="resizable">
+                                    <div zingchart id="chart-1" zc-json="myJson" zc-width="100%" zc-height="100%"></div>
+                                    <th class=" d-flex">
+                                        <h5 class="w-50 mt-3">Estres Acumulado : {{acumulado}} %</h5>
+                                    </th>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" ng-click="verEmociones()" class="btn btn-primary">REFRESH</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="./js/face-api.min.js"></script>
+    <script src="./js/main.js"></script>
+    <script type="application/json" src="./models"></script>
+</body>
+
+</html>
